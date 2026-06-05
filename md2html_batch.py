@@ -337,7 +337,9 @@ def md_to_html(md_path, out_path=None, title=None):
 </html>"""
 
     # Step 4: 写入文件
-    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+    out_dir = os.path.dirname(out_path)
+    if out_dir:
+        os.makedirs(out_dir, exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(full_html)
 

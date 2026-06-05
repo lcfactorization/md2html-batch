@@ -1,6 +1,6 @@
 # md2html-batch
 
-> **Windows Markdown-to-HTML Batch Converter**
+> **Cross-Platform Markdown-to-HTML Batch Converter**
 > Dark/Light theme toggle · Alert components · Risk/Grade tags · Responsive layout · Zero external dependencies
 
 ---
@@ -17,27 +17,31 @@
 | **Responsive** | Adapts to mobile / tablet / desktop |
 | **Print Optimized** | `@media print` rules for clean black-and-white output |
 | **Zero Dependencies** | Outputs a single self-contained HTML file — no CDN, no external assets |
+| **Cross-Platform** | Works on Windows (`.bat`) and macOS/Linux (`.sh`) |
 
 ---
 
 ## Requirements
 
 - **Python 3.6+** (no third-party packages needed)
-- **Pandoc** (must be installed and in system PATH): [Download pandoc](https://pandoc.org/installing.html)
-
-> **Windows only** (the `.bat` entry point is Windows-specific)
+- **Pandoc** (must be installed and in system PATH)
+  - Windows: [Download pandoc](https://pandoc.org/installing.html)
+  - macOS: `brew install pandoc`
+  - Linux: `sudo apt install pandoc` or `sudo dnf install pandoc`
 
 ---
 
 ## Quick Start
 
-### Option 1: Double-click (Simplest)
+### Windows
+
+#### Option 1: Double-click (Simplest)
 
 1. Copy `md2html.bat` into any folder containing `.md` files
 2. Double-click `md2html.bat`
 3. Enter the directory or file path when prompted
 
-### Option 2: Command-line Arguments
+#### Option 2: Command-line
 
 ```cmd
 :: Convert all .md files in the current directory
@@ -56,11 +60,35 @@ md2html.bat file1.md file2.md
 md2html.bat -y
 ```
 
-### Option 3: Direct Python Invocation
+### macOS / Linux
 
-```powershell
-# cd to the script directory, or use an absolute path
-python md2html_batch.py -d . -o ./html_output
+#### Option 1: Shell script (Recommended)
+
+```bash
+# First time: make executable
+chmod +x md2html.sh
+
+# Convert all .md files in the current directory
+./md2html.sh
+
+# Convert files in a specific directory
+./md2html.sh -d ~/Documents
+
+# Output to a specific directory
+./md2html.sh -d ~/Documents -o ~/Output
+
+# Convert specific files only
+./md2html.sh file1.md file2.md
+
+# Skip confirmation prompt
+./md2html.sh -y
+```
+
+#### Option 2: Direct Python Invocation
+
+```bash
+# Works on all platforms
+python3 md2html_batch.py -d . -o ./html_output
 ```
 
 ---
@@ -147,7 +175,9 @@ Grade tags:
 md2html_batch/
 ├── md2html_batch.py   # Core script (Python, no third-party deps)
 ├── md2html.bat        # Windows batch entry point
-└── README.md          # This document
+├── md2html.sh         # macOS/Linux shell entry point
+├── README.md          # English documentation
+└── README-cn.md       # Chinese documentation
 ```
 
 ---

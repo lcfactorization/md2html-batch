@@ -1,6 +1,6 @@
 # md2html-batch
 
-> **Windows  Markdown 批量转 HTML 工具**
+> **跨平台 Markdown 批量转 HTML 工具**
 > 支持明暗主题自动切换 · Alert 组件 · 风险/等级标签 · 响应式布局 · 零外部依赖
 
 ---
@@ -17,27 +17,31 @@
 | **响应式** | 手机 / 平板 / 桌面自适应 |
 | **打印优化** | `@media print` 优化黑白打印效果 |
 | **零依赖** | 输出为单文件 HTML，浏览器直接打开，无任何外部 CDN 依赖 |
+| **跨平台** | 支持 Windows（`.bat`）和 macOS/Linux（`.sh`） |
 
 ---
 
 ## 环境要求
 
 - **Python 3.6+**（无需安装任何第三方包）
-- **Pandoc**（需提前安装并加入系统 PATH）：[下载 pandoc](https://pandoc.org/installing.html)
-
-> **仅支持 Windows**（`.bat` 批处理入口为 Windows 专用）
+- **Pandoc**（需提前安装并加入系统 PATH）
+  - Windows：[下载 pandoc](https://pandoc.org/installing.html)
+  - macOS：`brew install pandoc`
+  - Linux：`sudo apt install pandoc` 或 `sudo dnf install pandoc`
 
 ---
 
 ## 快速开始
 
-### 方式一：双击运行（最简单）
+### Windows
+
+#### 方式一：双击运行（最简单）
 
 1. 把 `md2html.bat` 复制到任意含 `.md` 文件的目录
 2. 双击 `md2html.bat`
 3. 屏幕右上角显示「请输入路径」时，输入要转换的目录或文件路径
 
-### 方式二：命令行参数
+#### 方式二：命令行参数
 
 ```cmd
 :: 转换当前目录所有 .md 文件
@@ -56,11 +60,35 @@ md2html.bat file1.md file2.md
 md2html.bat -y
 ```
 
-### 方式三：直接调用 Python
+### macOS / Linux
 
-```powershell
-# 必须cd到脚本所在目录，或用绝对路径
-python md2html_batch.py -d . -o ./html_output
+#### 方式一：Shell 脚本（推荐）
+
+```bash
+# 首次使用：添加执行权限
+chmod +x md2html.sh
+
+# 转换当前目录所有 .md 文件
+./md2html.sh
+
+# 转换指定目录
+./md2html.sh -d ~/Documents
+
+# 输出到指定目录
+./md2html.sh -d ~/Documents -o ~/Output
+
+# 只转换指定文件
+./md2html.sh file1.md file2.md
+
+# 跳过确认提示
+./md2html.sh -y
+```
+
+#### 方式二：直接调用 Python
+
+```bash
+# 所有平台通用
+python3 md2html_batch.py -d . -o ./html_output
 ```
 
 ---
@@ -147,7 +175,8 @@ HTML 文件内置完整的明暗主题变量系统：
 md2html_batch/
 ├── md2html_batch.py   # 核心脚本（Python，无第三方依赖）
 ├── md2html.bat        # Windows 批处理入口
-└── README.md          # 英文文档
+├── md2html.sh         # macOS/Linux Shell 入口
+├── README.md          # 英文文档
 └── README-cn.md       # 中文文档
 ```
 
