@@ -1,76 +1,76 @@
 # md2html-batch
 
-> **Windows  Markdown 批量转 HTML 工具**
-> 支持明暗主题自动切换 · Alert 组件 · 风险/等级标签 · 响应式布局 · 零外部依赖
+> **Windows Markdown-to-HTML Batch Converter**
+> Dark/Light theme toggle · Alert components · Risk/Grade tags · Responsive layout · Zero external dependencies
 
 ---
 
-## 功能特性
+## Features
 
-| 特性 | 说明 |
+| Feature | Description |
 |:---|:---|
-| **明暗主题切换** | 右上角一键切换，自动记忆用户偏好（`localStorage`） |
-| **Alert 组件** | 支持 `[!NOTE]` `[!TIP]` `[!WARNING]` `[!IMPORTANT]` `[!CAUTION]` 五种标注块 |
-| **风险等级标签** | 司法文书分析输出 highest / high / medium / low 四级风险标签 |
-| **Grade 评分样式** | A/B/C/D/F 五级评分可视化 |
-| **回到顶部** | 滚动超过 300px 右上角出现按钮 |
-| **响应式** | 手机 / 平板 / 桌面自适应 |
-| **打印优化** | `@media print` 优化黑白打印效果 |
-| **零依赖** | 输出为单文件 HTML，浏览器直接打开，无任何外部 CDN 依赖 |
+| **Dark/Light Theme Toggle** | One-click switch (top-right corner), auto-saves preference via `localStorage` |
+| **Alert Components** | Supports `[!NOTE]` `[!TIP]` `[!WARNING]` `[!IMPORTANT]` `[!CAUTION]` blockquotes |
+| **Risk Level Tags** | Four-level risk labels: highest / high / medium / low |
+| **Grade Score Styles** | A/B/C/D/F five-tier visual grading |
+| **Back to Top** | Floating button appears after scrolling 300px |
+| **Responsive** | Adapts to mobile / tablet / desktop |
+| **Print Optimized** | `@media print` rules for clean black-and-white output |
+| **Zero Dependencies** | Outputs a single self-contained HTML file — no CDN, no external assets |
 
 ---
 
-## 环境要求
+## Requirements
 
-- **Python 3.6+**（无需安装任何第三方包）
-- **Pandoc**（需提前安装并加入系统 PATH）：[下载 pandoc](https://pandoc.org/installing.html)
+- **Python 3.6+** (no third-party packages needed)
+- **Pandoc** (must be installed and in system PATH): [Download pandoc](https://pandoc.org/installing.html)
 
-> **仅支持 Windows**（`.bat` 批处理入口为 Windows 专用）
+> **Windows only** (the `.bat` entry point is Windows-specific)
 
 ---
 
-## 快速开始
+## Quick Start
 
-### 方式一：双击运行（最简单）
+### Option 1: Double-click (Simplest)
 
-1. 把 `md2html.bat` 复制到任意含 `.md` 文件的目录
-2. 双击 `md2html.bat`
-3. 屏幕右上角显示「请输入路径」时，输入要转换的目录或文件路径
+1. Copy `md2html.bat` into any folder containing `.md` files
+2. Double-click `md2html.bat`
+3. Enter the directory or file path when prompted
 
-### 方式二：命令行参数
+### Option 2: Command-line Arguments
 
 ```cmd
-:: 转换当前目录所有 .md 文件
+:: Convert all .md files in the current directory
 md2html.bat
 
-:: 转换指定目录
+:: Convert files in a specific directory
 md2html.bat -d C:\Docs
 
-:: 输出到指定目录
+:: Output to a specific directory
 md2html.bat -d C:\Docs -o C:\Output
 
-:: 只转换指定文件
+:: Convert specific files only
 md2html.bat file1.md file2.md
 
-:: 跳过确认提示
+:: Skip confirmation prompt
 md2html.bat -y
 ```
 
-### 方式三：直接调用 Python
+### Option 3: Direct Python Invocation
 
 ```powershell
-# 必须cd到脚本所在目录，或用绝对路径
+# cd to the script directory, or use an absolute path
 python md2html_batch.py -d . -o ./html_output
 ```
 
 ---
 
-## 主题系统
+## Theme System
 
-HTML 文件内置完整的明暗主题变量系统：
+The generated HTML includes a complete dark/light theme variable system:
 
 ```css
-/* 暗色主题（默认） */
+/* Dark theme (default) */
 [data-theme="dark"] {
     --bg-color: #1e1e1e;
     --text-color: #dddddd;
@@ -78,7 +78,7 @@ HTML 文件内置完整的明暗主题变量系统：
     /* ... */
 }
 
-/* 亮色主题 */
+/* Light theme */
 [data-theme="light"] {
     --bg-color: #ffffff;
     --text-color: #333333;
@@ -87,84 +87,84 @@ HTML 文件内置完整的明暗主题变量系统：
 }
 ```
 
-用户点击右上角 ☀️/🌙 按钮即可切换，偏好自动保存到 `localStorage`，下次打开自动应用。
+Click the ☀️/🌙 button in the top-right corner to toggle. Your preference is automatically saved to `localStorage` and restored on next visit.
 
 ---
 
-## Alert 组件示例
+## Alert Component Examples
 
 ````markdown
-[!NOTE]
-这是一条 NOTE 提示
+> [!NOTE]
+> This is a NOTE
 
-[!TIP]
-这是一条 TIP 提示
+> [!TIP]
+> This is a TIP
 
-[!WARNING]
-这是一条 WARNING 警告
+> [!WARNING]
+> This is a WARNING
 
-[!IMPORTANT]
-这是一条 IMPORTANT 重要提示
+> [!IMPORTANT]
+> This is IMPORTANT
 
-[!CAUTION]
-这是一条 CAUTION 注意事项
+> [!CAUTION]
+> This is a CAUTION
 ````
 
-渲染效果（暗色主题）：
+Rendered appearance (dark theme):
 
-- **NOTE** — 蓝色边框，蓝色背景透明度
-- **TIP** — 绿色边框，绿色文字
-- **IMPORTANT** — 紫色边框
-- **WARNING** — 橙色边框
-- **CAUTION** — 红色边框
-
----
-
-## 风险标签示例
-
-```html
-<span class="risk-tag" data-level="highest">极高风险</span>
-<span class="risk-tag" data-level="high">高风险</span>
-<span class="risk-tag" data-level="medium">中风险</span>
-<span class="risk-tag" data-level="low">低风险</span>
-```
-
-评分等级：
-
-```html
-<span class="grade-tag" data-grade="A">优秀</span>
-<span class="grade-tag" data-grade="B">良好</span>
-<span class="grade-tag" data-grade="C">合格</span>
-<span class="grade-tag" data-grade="D">较差</span>
-<span class="grade-tag" data-grade="F">不及格</span>
-```
+- **NOTE** — Blue border, semi-transparent blue background
+- **TIP** — Green border, green text
+- **IMPORTANT** — Purple border
+- **WARNING** — Orange border
+- **CAUTION** — Red border
 
 ---
 
-## 文件结构
+## Risk Tag Examples
+
+```html
+<span class="risk-tag" data-level="highest">Highest Risk</span>
+<span class="risk-tag" data-level="high">High Risk</span>
+<span class="risk-tag" data-level="medium">Medium Risk</span>
+<span class="risk-tag" data-level="low">Low Risk</span>
+```
+
+Grade tags:
+
+```html
+<span class="grade-tag" data-grade="A">Excellent</span>
+<span class="grade-tag" data-grade="B">Good</span>
+<span class="grade-tag" data-grade="C">Pass</span>
+<span class="grade-tag" data-grade="D">Poor</span>
+<span class="grade-tag" data-grade="F">Fail</span>
+```
+
+---
+
+## File Structure
 
 ```
 md2html_batch/
-├── md2html_batch.py   # 核心脚本（Python，无第三方依赖）
-├── md2html.bat        # Windows 批处理入口
-└── README.md          # 本文档
+├── md2html_batch.py   # Core script (Python, no third-party deps)
+├── md2html.bat        # Windows batch entry point
+└── README.md          # This document
 ```
 
 ---
 
-## 工作原理
+## How It Works
 
-1. Python 脚本调用系统已安装的 Pandoc（`pandoc -f markdown -t html`）将 Markdown 转为基础 HTML
-2. 在基础 HTML 上注入完整的 `<style>`（主题变量、响应式、Alert、标签样式）和 `<script>`（明暗切换、回到顶部、Alert 解析）
-3. 生成的文件为**完全自包含的单文件 HTML**，无任何外部依赖
+1. The Python script calls the system-installed Pandoc (`pandoc -f markdown -t html`) to convert Markdown to base HTML
+2. It injects a complete `<style>` block (theme variables, responsive layout, alerts, tag styles) and `<script>` block (theme toggle, back-to-top, alert parsing) into the base HTML
+3. The output is a **fully self-contained single HTML file** with zero external dependencies
 
 ---
 
-## 适用场景
+## Use Cases
 
-- 司法文书质量分析报告批量生成
-- 内部知识库文档批量 HTML 化
-- 任何需要生成可离线阅读、带美观样式 Markdown 报告的场景
+- Batch generation of judicial document quality analysis reports
+- Converting internal knowledge base documents to styled HTML
+- Any scenario requiring offline-readable, beautifully styled Markdown reports
 
 ---
 

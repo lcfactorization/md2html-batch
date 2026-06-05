@@ -223,12 +223,77 @@ hr { border:0; border-top:1px solid var(--scrollbar-color); margin:2em 0; }
 <span id="themeIcon">&#9789;</span><span class="tip" id="themeTip">切换至浅色模式</span></button>
 <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8679;</button>
 <div id="MainContent">
-<h1 id="md2html_batch-markdown-批量转模板-html">md2html_batch — Markdown 批量转模板 HTML</h1>
-<h2 id="快速使用">快速使用</h2>
-<h3 id="方式一双击-bat最简单">方式一：双击 bat（最简单）</h3>
-<p>把 <code>md2html.bat</code> 复制到任意含 .md 文件的目录，双击运行。</p>
-<h3 id="方式二命令行">方式二：命令行</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">:: 转换当前目录所有 .md</span></span>
+<h1 id="md2html-batch">md2html-batch</h1>
+<blockquote>
+<p><strong>Windows Markdown 批量转 HTML 工具</strong> 支持明暗主题自动切换 · Alert 组件 · 风险/等级标签 · 响应式布局 · 零外部依赖</p>
+</blockquote>
+<hr />
+<h2 id="功能特性">功能特性</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>明暗主题切换</strong></td>
+<td style="text-align: left;">右上角一键切换，自动记忆用户偏好（<code>localStorage</code>）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Alert 组件</strong></td>
+<td style="text-align: left;">支持 <code>[!NOTE]</code> <code>[!TIP]</code> <code>[!WARNING]</code> <code>[!IMPORTANT]</code> <code>[!CAUTION]</code> 五种标注块</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>风险等级标签</strong></td>
+<td style="text-align: left;">司法文书分析输出 highest / high / medium / low 四级风险标签</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Grade 评分样式</strong></td>
+<td style="text-align: left;">A/B/C/D/F 五级评分可视化</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>回到顶部</strong></td>
+<td style="text-align: left;">滚动超过 300px 右上角出现按钮</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>响应式</strong></td>
+<td style="text-align: left;">手机 / 平板 / 桌面自适应</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>打印优化</strong></td>
+<td style="text-align: left;"><code>@media print</code> 优化黑白打印效果</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>零依赖</strong></td>
+<td style="text-align: left;">输出为单文件 HTML，浏览器直接打开，无任何外部 CDN 依赖</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="环境要求">环境要求</h2>
+<ul>
+<li><strong>Python 3.6+</strong>（无需安装任何第三方包）</li>
+<li><strong>Pandoc</strong>（需提前安装并加入系统 PATH）：<a href="https://pandoc.org/installing.html">下载 pandoc</a></li>
+</ul>
+<blockquote>
+<p><strong>仅支持 Windows</strong>（<code>.bat</code> 批处理入口为 Windows 专用）</p>
+</blockquote>
+<hr />
+<h2 id="快速开始">快速开始</h2>
+<h3 id="方式一双击运行最简单">方式一：双击运行（最简单）</h3>
+<ol type="1">
+<li>把 <code>md2html.bat</code> 复制到任意含 <code>.md</code> 文件的目录</li>
+<li>双击 <code>md2html.bat</code></li>
+<li>屏幕右上角显示「请输入路径」时，输入要转换的目录或文件路径</li>
+</ol>
+<h3 id="方式二命令行参数">方式二：命令行参数</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cmd"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">:: 转换当前目录所有 .md 文件</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>md2html.bat</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">:: 转换指定目录</span></span>
@@ -240,44 +305,89 @@ hr { border:0; border-top:1px solid var(--scrollbar-color); margin:2em 0; }
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">:: 只转换指定文件</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>md2html.bat file1.md file2.md</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">:: 跳过确认</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">:: 跳过确认提示</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>md2html.bat <span class="at">-y</span></span></code></pre></div>
 <h3 id="方式三直接调用-python">方式三：直接调用 Python</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>python md2html_batch<span class="op">.</span><span class="fu">py</span> <span class="op">-</span>d <span class="op">.</span> <span class="op">-</span>o <span class="op">./</span>html_output</span></code></pre></div>
-<h2 id="依赖">依赖</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 必须cd到脚本所在目录，或用绝对路径</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>python md2html_batch<span class="op">.</span><span class="fu">py</span> <span class="op">-</span>d <span class="op">.</span> <span class="op">-</span>o <span class="op">./</span>html_output</span></code></pre></div>
+<hr />
+<h2 id="主题系统">主题系统</h2>
+<p>HTML 文件内置完整的明暗主题变量系统：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* 暗色主题（默认） */</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">[</span><span class="ss">data-theme</span><span class="op">=</span><span class="st">&quot;dark&quot;</span><span class="ex">]</span> {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--bg-color</span><span class="ch">:</span> <span class="cn">#1e1e1e</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--text-color</span><span class="ch">:</span> <span class="cn">#dddddd</span><span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--link-color</span><span class="ch">:</span> <span class="cn">#6ea8fe</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* ... */</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">/* 亮色主题 */</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">[</span><span class="ss">data-theme</span><span class="op">=</span><span class="st">&quot;light&quot;</span><span class="ex">]</span> {</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">--bg-color</span><span class="ch">:</span> <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">--text-color</span><span class="ch">:</span> <span class="cn">#333333</span><span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">--link-color</span><span class="ch">:</span> <span class="cn">#2E67D3</span><span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* ... */</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>用户点击右上角 ☀️/🌙 按钮即可切换，偏好自动保存到 <code>localStorage</code>，下次打开自动应用。</p>
+<hr />
+<h2 id="alert-组件示例">Alert 组件示例</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">!NOTE</span><span class="co">]</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>这是一条 NOTE 提示</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">!TIP</span><span class="co">]</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>这是一条 TIP 提示</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">!WARNING</span><span class="co">]</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>这是一条 WARNING 警告</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">!IMPORTANT</span><span class="co">]</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>这是一条 IMPORTANT 重要提示</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">!CAUTION</span><span class="co">]</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>这是一条 CAUTION 注意事项</span></code></pre></div>
+<p>渲染效果（暗色主题）：</p>
 <ul>
-<li><strong>Python 3.6+</strong>（无第三方包）</li>
-<li><strong>Pandoc</strong>（需在 PATH 中，下载：https://pandoc.org/installing.html）</li>
+<li><strong>NOTE</strong> — 蓝色边框，蓝色背景透明度</li>
+<li><strong>TIP</strong> — 绿色边框，绿色文字</li>
+<li><strong>IMPORTANT</strong> — 紫色边框</li>
+<li><strong>WARNING</strong> — 橙色边框</li>
+<li><strong>CAUTION</strong> — 红色边框</li>
 </ul>
-<h2 id="功能特性">功能特性</h2>
+<hr />
+<h2 id="风险标签示例">风险标签示例</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;risk-tag&quot;</span><span class="ot"> data-level</span><span class="op">=</span><span class="st">&quot;highest&quot;</span><span class="dt">&gt;</span>极高风险<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;risk-tag&quot;</span><span class="ot"> data-level</span><span class="op">=</span><span class="st">&quot;high&quot;</span><span class="dt">&gt;</span>高风险<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;risk-tag&quot;</span><span class="ot"> data-level</span><span class="op">=</span><span class="st">&quot;medium&quot;</span><span class="dt">&gt;</span>中风险<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;risk-tag&quot;</span><span class="ot"> data-level</span><span class="op">=</span><span class="st">&quot;low&quot;</span><span class="dt">&gt;</span>低风险<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>评分等级：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;grade-tag&quot;</span><span class="ot"> data-grade</span><span class="op">=</span><span class="st">&quot;A&quot;</span><span class="dt">&gt;</span>优秀<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;grade-tag&quot;</span><span class="ot"> data-grade</span><span class="op">=</span><span class="st">&quot;B&quot;</span><span class="dt">&gt;</span>良好<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;grade-tag&quot;</span><span class="ot"> data-grade</span><span class="op">=</span><span class="st">&quot;C&quot;</span><span class="dt">&gt;</span>合格<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;grade-tag&quot;</span><span class="ot"> data-grade</span><span class="op">=</span><span class="st">&quot;D&quot;</span><span class="dt">&gt;</span>较差<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;grade-tag&quot;</span><span class="ot"> data-grade</span><span class="op">=</span><span class="st">&quot;F&quot;</span><span class="dt">&gt;</span>不及格<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span></code></pre></div>
+<hr />
+<h2 id="文件结构">文件结构</h2>
+<pre><code>md2html_batch/
+├── md2html_batch.py   # 核心脚本（Python，无第三方依赖）
+├── md2html.bat        # Windows 批处理入口
+└── README.md          # 本文档</code></pre>
+<hr />
+<h2 id="工作原理">工作原理</h2>
+<ol type="1">
+<li>Python 脚本调用系统已安装的 Pandoc（<code>pandoc -f markdown -t html</code>）将 Markdown 转为基础 HTML</li>
+<li>在基础 HTML 上注入完整的 <code>&lt;style&gt;</code>（主题变量、响应式、Alert、标签样式）和 <code>&lt;script&gt;</code>（明暗切换、回到顶部、Alert 解析）</li>
+<li>生成的文件为<strong>完全自包含的单文件 HTML</strong>，无任何外部依赖</li>
+</ol>
+<hr />
+<h2 id="适用场景">适用场景</h2>
 <ul>
-<li>明暗主题切换（右上角按钮，自动记忆偏好）</li>
-<li>回到顶部按钮（滚动超过 300px 自动出现）</li>
-<li>Alert 组件（<code>[!NOTE]</code> <code>[!TIP]</code> <code>[!WARNING]</code> <code>[!IMPORTANT]</code> <code>[!CAUTION]</code>）</li>
-<li>风险/等级标签样式</li>
-<li>响应式布局（手机/平板/桌面自适应）</li>
-<li>打印优化</li>
-<li>零外部依赖（单文件 HTML，浏览器直接打开）</li>
+<li>司法文书质量分析报告批量生成</li>
+<li>内部知识库文档批量 HTML 化</li>
+<li>任何需要生成可离线阅读、带美观样式 Markdown 报告的场景</li>
 </ul>
-<h2 id="文件说明">文件说明</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">文件</th>
-<th style="text-align: left;">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><code>md2html_batch.py</code></td>
-<td style="text-align: left;">核心脚本，包含 CSS/JS/转换逻辑</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>md2html.bat</code></td>
-<td style="text-align: left;">Windows 批处理入口</td>
-</tr>
-</tbody>
-</table>
+<hr />
+<h2 id="license">License</h2>
+<p>MIT</p>
 
 </div>
 
